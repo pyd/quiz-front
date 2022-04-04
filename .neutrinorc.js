@@ -14,5 +14,18 @@ module.exports = {
       }
     }),
     jest(),
+    // (neutrino) => {
+    //   neutrino.config.modukle
+    //   .rule('style')
+    //   .use('css')
+    //   .options({ modules: true });
+    // }
   ],
+  style: {
+    loaders: [
+      { loader: 'sass-loader', userId: 'sass' },
+    ],
+    test: /\.(css|sass)$/,
+    moduleTest: /\.module.(css|sass)$/
+  },
 };
