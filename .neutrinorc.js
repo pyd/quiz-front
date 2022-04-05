@@ -15,17 +15,17 @@ module.exports = {
     }),
     jest(),
     // (neutrino) => {
-    //   neutrino.config.modukle
+    //   neutrino.config.module
     //   .rule('style')
     //   .use('css')
     //   .options({ modules: true });
     // }
   ],
-  style: {
-    loaders: [
-      { loader: 'sass-loader', userId: 'sass' },
-    ],
-    test: /\.(css|sass)$/,
-    moduleTest: /\.module.(css|sass)$/
-  },
+  // style: {
+  //   loaders: [
+  //     { loader: 'sass-loader', userId: 'sass' },
+  //   ],
+  //   test: /\.(css|sass)$/,
+  //   moduleTest: /\.module.(css|sass)$/
+  // },
 };
