@@ -7,11 +7,17 @@ import styles from './StartButton.module.css';
  * @param {handler} props 
  * @returns 
  */
-function StartButton(props) {
+function StartButton(props)
+{
+  const { handler } = props;
 
   return (
-    <button type="button" onClick={props.handler} className={styles.startButton}>START</button>
+    <button type="button" onClick={handler} className={styles.startButton}>START</button>
   );
 }
+
+StartButton.propTypes = {
+  handler: propTypes.func.isRequired,
+};
 
 export default StartButton;
