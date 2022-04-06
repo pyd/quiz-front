@@ -3,44 +3,71 @@ import React, { useRef, useState } from 'react';
 import styles from './App.module.css';
 import StartButton from '../StartButton/StartButton';
 import Question from '../Question/Question';
-import data from '../../data/questions.json';
-
+import { useEffect } from 'react/cjs/react.production.min';
 
 function App() {
 
-  const [questions, setQuestions] = useState([
+  const [started, setStarted] = useState(false);
+
+  // data of the question currently displayed
+  const [currentQuestionData, setCurrentQuestionData] = useState({});
+  // 
+  const question = useRef(null);
+
+  const questions = [
     { id: 1, category: 'html', text:'Question 1', answers:
       [
-        { id: 1, text: 'Réponse 1 invalide' },
-        { id: 2, text: 'Réponse 2 invalide' },
-        { id: 3, text: 'Réponse 3 valide' },
-        { id: 4, text: 'Réponse 4 invalide' },
+        { id: 1, text: 'Réponse 1 question 1 invalide' },
+        { id: 2, text: 'Réponse 2 question 1 invalide' },
+        { id: 3, text: 'Réponse 3 question 1 valide' },
+        { id: 4, text: 'Réponse 4 question 1 invalide' },
       ]
     },
-  ]);
-
-  const [answers, setAnswers] = useState([])
-
-  const question = useRef(null);
+    { id: 1, category: 'html', text:'Question 2', answers:
+      [
+        { id: 1, text: 'Réponse 1 question 2 invalide' },
+        { id: 2, text: 'Réponse 2 question 2 invalide' },
+        { id: 3, text: 'Réponse 3 question 2 valide' },
+        { id: 4, text: 'Réponse 4 question 2 invalide' },
+      ]
+    },
+  ];
+  
 
   // start the quiz
   function handleStart(e) {
     e.preventDefault();
-    e.target.style.display = 'none';
-    question.current.style.display = 'block';
+    setCurrentQuestionData(filterQuestionData(questions[0]));
+    setStarted(true);
   }
 
-  function handleAnswer(ids) {
+  function filterQuestionData(questionData) {
+    return {
+      question: questionData.text,
+      category: questionData.category,
+      answers: questionData.answers
+    }
+  }
+
+  function handleAnswer(ids, questionPassed) {
     console.log('register answer ids', ids);
+    console.log('question passed', questionPassed);
   }
 
   return (
     <div className={styles.App}>
       <h1>Salle #214 - Quiz front</h1>
-      <StartButton handler={handleStart} />
-      <div className={styles.questionContainer} ref={question}>
-        <Question question={questions[0].text} answers={questions[0].answers} answerHandler={handleAnswer}/>
-      </div>
+
+      {!started ? (
+        <>
+          <StartButton handler={handleStart} />
+        </>
+      ) : (
+        <>
+          <Question data={currentQuestionData} answerHandler={handleAnswer} />
+        </>
+      )}
+
     </div>
   );
 }

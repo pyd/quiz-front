@@ -7,19 +7,22 @@ import styles from './Question.module.css';
  * @param {question, answers, answerHandler} props
  * @returns
  */
-function Question(props) {
-  const { question, answers, answerHandler } = props;
+function Question({data : {question, answers, category}, answerHandler}) {
 
-  console.log('question', question);
-
-  function saveAnswer() {
+  /**
+   * send selected answer(s) & the flag 'question passed' back
+   * 
+   */
+  function sendAnswer(e) {
+    e.preventDefault();
+    const questionPassed = e.target.dataset.questionpassed;
     let answerIds = [];
     document.querySelectorAll('input').forEach((answer, i) => {
       if (answer.checked) {
         answerIds.push(answer.value);
       }
     });
-    answerHandler(answerIds);
+    answerHandler(answerIds, questionPassed);
   }
 
   return (
@@ -37,15 +40,18 @@ function Question(props) {
             </li>
           ))}
         </ul>
-        <button type="button" onClick={saveAnswer}>Valider</button>
+        <button type="button" onClick={sendAnswer} data-questionpassed="false">Valider la réponse</button>
+        <button type="button" onClick={sendAnswer} data-questionpassed="true">Répondre plus tard</button>
       </form>
     </div>
   );
 }
 
 Question.propTypes = {
-  question: propTypes.string.isRequired,
-  answers: propTypes.arrayOf(propTypes.string).isRequired,
+  question: propTypes.string,
+  answers: propTypes.arrayOf(propTypes.string),
+  // question: propTypes.string.isRequired,
+  // answers: propTypes.arrayOf(propTypes.string).isRequired,
 };
 
 export default Question;
