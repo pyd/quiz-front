@@ -1,0 +1,9 @@
+.App {
+  padding: 20px;
+  color: red;
+}
+
+.App .questionContainer {
+  display: none;
+}
+/*# sourceMappingURL=App.module.css.map */
