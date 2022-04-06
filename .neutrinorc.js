@@ -9,6 +9,7 @@ module.exports = {
   use: [
     airbnb({
       eslint: {
+        // issue with linebreak between win & ubuntu
         rules: {
           "linebreak-style": 0
         }
