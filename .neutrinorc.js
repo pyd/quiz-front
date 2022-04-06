@@ -7,7 +7,13 @@ module.exports = {
     root: __dirname,
   },
   use: [
-    airbnb(),
+    airbnb({
+      eslint: {
+        rules: {
+          "linebreak-style": 0
+        }
+      }
+    }),
     react({
       html: {
         title: 'quiz-frontend'
@@ -21,11 +27,11 @@ module.exports = {
     //   .options({ modules: true });
     // }
   ],
-  // style: {
-  //   loaders: [
-  //     { loader: 'sass-loader', userId: 'sass' },
-  //   ],
-  //   test: /\.(css|sass)$/,
-  //   moduleTest: /\.module.(css|sass)$/
-  // },
+  style: {
+    loaders: [
+      { loader: 'sass-loader', userId: 'sass' },
+    ],
+    test: /\.(css|sass)$/,
+    moduleTest: /\.module.(css|sass)$/
+  },
 };
