@@ -3,15 +3,16 @@ import React, { useRef, useState } from 'react';
 import styles from './App.module.css';
 import StartButton from '../StartButton/StartButton';
 import Question from '../Question/Question';
-import { useEffect } from 'react/cjs/react.production.min';
 
 function App() {
 
   const [started, setStarted] = useState(false);
 
+  const [answers, setAnswers] = useState([]);
+
   // data of the question currently displayed
-  const [currentQuestionData, setCurrentQuestionData] = useState({});
-  // 
+  const [currentQuestion, setCurrentQuestion] = useState({ test: 'initial' });
+  // ref of the Question element 
   const question = useRef(null);
 
   const questions = [
@@ -37,7 +38,7 @@ function App() {
   // start the quiz
   function handleStart(e) {
     e.preventDefault();
-    setCurrentQuestionData(filterQuestionData(questions[0]));
+    setCurrentQuestion(questions[0]);
     setStarted(true);
   }
 
@@ -50,8 +51,15 @@ function App() {
   }
 
   function handleAnswer(ids, questionPassed) {
-    console.log('register answer ids', ids);
-    console.log('question passed', questionPassed);
+    let newAnswers = answers;
+    newAnswers.push({
+      questionId: currentQuestion.id,
+      answersId: ids,
+      questionPassed: questionPassed
+    });
+    console.log('newAnswers', newAnswers);
+    setAnswers(newAnswers);
+    console.log('answers', answers);
   }
 
   return (
@@ -64,7 +72,9 @@ function App() {
         </>
       ) : (
         <>
-          <Question data={currentQuestionData} answerHandler={handleAnswer} />
+          <Question data={filterQuestionData(currentQuestion)} answerHandler={handleAnswer} />
+          Answers :
+          { JSON.stringify(answers) }
         </>
       )}
 

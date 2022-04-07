@@ -21,12 +21,6 @@ module.exports = {
       }
     }),
     jest(),
-    // (neutrino) => {
-    //   neutrino.config.module
-    //   .rule('style')
-    //   .use('css')
-    //   .options({ modules: true });
-    // }
   ],
   style: {
     loaders: [

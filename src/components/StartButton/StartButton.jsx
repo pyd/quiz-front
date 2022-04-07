@@ -4,13 +4,11 @@ import styles from './StartButton.module.css';
 
 /**
  * button to start the quiz
- * @param {handler} props 
- * @returns 
+ * @param {handler} props
+ * @returns
  */
-function StartButton(props)
-{
+function StartButton(props) {
   const { handler } = props;
-
   return (
     <button type="button" onClick={handler} className={styles.startButton}>START</button>
   );
